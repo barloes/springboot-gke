@@ -4,6 +4,12 @@ steps:
             '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}',
             '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest',
             '.' ]
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      - run
+      - --filename="kube/pod.yaml"
+      - --location="asia-southeast1"
+      - --cluster="autopilot-cluster-1"
 images:
   - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}'
   - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest'

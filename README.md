@@ -28,6 +28,14 @@ gcloud builds submit --config=cloudbuild.yaml \
 #      _REPOSITORY: personal-docker
 #      _IMAGE: web-stg
 
+
+kubectl expose pod web --name web-service \
+    --type LoadBalancer --protocol TCP --port 80 --target-port 8080
+
+alias k='kubectl'
+k apply -f kubernetes/pod.yaml
+k expose pod web --type=LoadBalancer --port=80 --target-port=8080
+
 ```
 
 # TODO
