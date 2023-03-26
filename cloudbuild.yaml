@@ -1,11 +1,22 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: [ 'build',
-            '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}',
+            '--no-cache',
+      #            '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}',
             '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest',
             '.' ]
-images:
-  - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}'
-  - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest'
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args: [ 'run',
+            '--filename=kube.yaml',
+            '--location=asia-southeast1',
+            '--cluster=autopilot-cluster-1' ]
+  - name: "gcr.io/cloud-builders/kubectl"
+    args: [ "rollout", "restart", "deployment/web"]
+    env:
+      - "CLOUDSDK_COMPUTE_ZONE=asia-southeast1"
+      - "CLOUDSDK_CONTAINER_CLUSTER=autopilot-cluster-1"
 options:
   logging: CLOUD_LOGGING_ONLY
+images:
+#  - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:${BRANCH_NAME}'
+  - '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest'
