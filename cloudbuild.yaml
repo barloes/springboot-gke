@@ -5,10 +5,9 @@ steps:
             '-t', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest',
             '.' ]
   - name: "gcr.io/cloud-builders/gke-deploy"
-    args:
-      - run
-      - --filename="kube/pod.yaml"
-      - --location="asia-southeast1"
-      - --cluster="autopilot-cluster-1"
+    args: [ 'run',
+            '--filename=pod.yaml',
+            '--location=asia-southeast1',
+            '--cluster=autopilot-cluster-1' ]
 options:
   logging: CLOUD_LOGGING_ONLY
