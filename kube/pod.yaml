@@ -8,6 +8,7 @@ spec:
   containers:
     - name: web
       image: asia-southeast1-docker.pkg.dev/poc-testing-personal/personal-docker/web-stg:latest
+      imagePullPolicy: "Always"
       ports:
         - containerPort: 8080
 
