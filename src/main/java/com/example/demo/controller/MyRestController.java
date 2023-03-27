@@ -16,6 +16,6 @@ public class MyRestController {
     public String myEndpoint() {
         logger.debug("Endpoint /api/endpoint called");
         // Your endpoint logic here
-        return "1.0";
+        return "2.0";
     }
 }
