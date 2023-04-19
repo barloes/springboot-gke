@@ -9,7 +9,8 @@ steps:
     args: [ 'run',
             '--filename=kube.yaml',
             '--location=asia-southeast1',
-            '--cluster=autopilot-cluster-1' ]
+            '--cluster=autopilot-cluster-1',
+            '--image', '${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:latest' ]
   - name: "gcr.io/cloud-builders/kubectl"
     args: [ "rollout", "restart", "deployment/web"]
     env:
