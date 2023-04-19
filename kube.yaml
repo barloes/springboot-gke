@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: ${_LOCATION}-docker.pkg.dev/${_PROJECT_ID}/${_REPOSITORY}/${_IMAGE}:<IMAGE_TAG>
+          image: asia-southeast1-docker.pkg.dev/poc-testing-personal/personal-docker/web-stg:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
