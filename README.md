@@ -48,3 +48,9 @@ k expose pod web --type=LoadBalancer --port=80 --target-port=8080
 - [ ] Redis integration
 - [ ] MongoDB integration
 - [ ] MySQL integration
+
+'''
+gcloud container clusters get-credentials autopilot-cluster-1 --zone=asia-southeast1	
+
+
+'''
